@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="rent.css">
+
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <a  href="rent.html" class="logo" ><i class='bx bx-home'></i>Renterific</a>
+    
+            
+            <!-- log in btn -->
+           
+        </div>
+    </header>
+    <div class="login container">
+        <div class="login-container">
+            <h2>Welcome , Let's get started</h2>
+            <p>Already have account <a href="login.html">Log In</a></p>
+            <form id="signupForm">
+                <span>Username </span>
+                <input type="text" name="" id="signupUsername" placeholder="Your Name" required>
+                <span>email </span>
+                <input type="email" name="" id="signupEmail" placeholder="youremail@gmil.com" required>
+                <sapn>Phone</sapn>
+                <input type="number" name="" id="signupNumber" placeholder="Enter Your Mobile Number" required>
+                <sapn>Password</sapn>
+                <input type="password" name="" id="signupPassword" placeholder=" Enter Your Password" required>
+                <input type="submit" value="Sign Up" class="button">
+                <a href="login.html" onclick="showloginForm()">Already Have Account </a>
+            </form>
+            <a href="login.html" class="btn">Log In</a>
+        </div>
+        <div class="login-image">
+            <img src="assets/welcome1.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="login container">
+        <div class="login-container">
+            <h2>Login To Continue</h2>
+            <p>Log in with your data that you entered <br> during your registration</p>
+
+            <form id="loginForm">
+                <span>Enter your email address </span>
+                <input type="text" name="" id="loginUsername" placeholder="Username" required>
+                <sapn>Enter your password</sapn>
+                <input type="password" name="" id="loginPassword" placeholder="Password" required>
+                <input type="submit" value="Log In" class="button">
+                <a href="#" >Forget Password</a>
+            </form>
+            <a href="signup.html" class="btn" onclick="showsignupForm()">Sign up now</a>
+        </div>
+        <div class="login-image">
+            <img src="assets/signup.avif" alt="">
+        </div>
+    </div>
+    
+<!-- footer -->
+<section class="footer">
+    <div class="footer-container container">
+        <h2>BVVS</h2>
+        <div class="footer-box">
+            <h3>Web Builders</h3>
+            <a href="#">Kumar</a>
+            <a href="#">Rakshit</a>
+            <a href="#">Hanamant</a>
+        </div>
+        <div class="footer-box">
+            <h3>Locations</h3>
+            <a href="#">Badami</a>
+            <a href="#">Lokapur</a>
+            <a href="#">Badami</a>
+        </div>
+        <div class="footer-box">
+            <h3>Contact</h3>
+            <a href="#">(+91)9591781460</a>
+            <a href="#">(+91)9591781460</a>
+            <a href="#">(+91)9591781460</a>
+        </div>
+        
+    </div>
+</section>
+<div class="copyright">
+    <p>&#169; CarpoolVenom All Rights Reserved</p>
+</div>
+</body>
+<script src="server/script.js"></script>
+
+</html>
