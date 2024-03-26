@@ -30,9 +30,29 @@
                 <input type="text" name="" id="username" placeholder="Username" required>
                 <sapn>Enter your password</sapn>
                 <input type="password" name="" id="userpassword" placeholder="Password" required>
-                <input type="submit" value="Log In" class="button">
+                <a href="#" class="btn" id="loginButton">Login</a>
                 <a href="#" >Forget Password</a>
             </form>
+            <script>
+                document.getElementById("loginButton").addEventListener("click", function(event) {
+                    // Prevent the default behavior of the link
+                    event.preventDefault();
+                
+                    // Get the username and password input fields
+                    var username = document.getElementById("username").value;
+                    var password = document.getElementById("userpassword").value;
+                
+                    // Check if username and password are not empty
+                    if (username.trim() !== "" && password.trim() !== "") {
+                        // If both fields are filled, redirect to rent.html
+                        window.location.href = "rent.html";
+                    } else {
+                        // If either field is empty, display an alert
+                        alert("Please enter both username and password.");
+                    }
+                });
+                </script>
+            
             <a href="signup.html" class="btn">Sign up now</a>
         </div>
         <div class="login-image">
