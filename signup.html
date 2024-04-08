@@ -92,6 +92,41 @@
     <p>&#169; CarpoolVenom All Rights Reserved</p>
 </div>
 </body>
-<script src="server/script.js"></script>
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        // Get form inputs
+        var username = document.getElementById("signupUsername").value;
+        var email = document.getElementById("signupEmail").value;
+        var number = document.getElementById("signupNumber").value;
+        var password = document.getElementById("signupPassword").value;
+    
+        // Make AJAX request to signup endpoint
+        fetch('http://localhost:9000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                number: number,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // Show response message
+            if (data.message === "User created successfully") {
+                // Redirect to login page after successful signup
+                window.location.href = "login.html";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    </script>
 
 </html>
