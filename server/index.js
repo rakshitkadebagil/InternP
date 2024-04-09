@@ -2,18 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://rakshit:rakshit123@cluster0.odirpxt.mongodb.net/', {
-    
-}).then(() => {
+mongoose.connect('mongodb+srv://rakshit:rakshit123@cluster0.odirpxt.mongodb.net/', { 
+  
+ }).then(() => {
     console.log('Connected to MongoDB Atlas');
-}).catch((error) => {
+}
+).catch((error) => {
     console.log('Error connecting to MongoDB Atlas');
 });
 
@@ -37,11 +37,8 @@ app.post('/signup', async (req, res) => {
         return res.status(400).json({ message: 'Username already exists' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Create new user
-    const newUser = new User({ username, email, number, password: hashedPassword });
+    const newUser = new User({ username, email, number, password });
     await newUser.save();
     return res.status(200).json({ message: 'User created successfully' });
 });
@@ -49,19 +46,12 @@ app.post('/signup', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    // Find user by username
-    const user = await User.findOne({ username });
+    // Find user by username and password
+    const user = await User.findOne({ username, password });
     if (user) {
-        // Compare the provided password with the hashed password
-        const match = await bcrypt.compare(password, user.password);
-
-        if (match) {
-            return res.status(200).json({ message: 'Login successful' });
-        } else {
-            return res.status(400).json({ message: 'Invalid password' });
-        }
+        return res.status(200).json({ message: 'Login successful' });
     } else {
-        return res.status(400).json({ message: 'User not found' });
+        return res.status(400).json({ message: 'Invalid username or password' });
     }
 });
 

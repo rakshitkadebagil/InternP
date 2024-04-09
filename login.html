@@ -1,22 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Login</title>
     <link rel="stylesheet" href="rent.css">
-
-    <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 <body>
     <header>
         <div class="nav container">
             <a class="logo" ><i class='bx bx-home'></i>Renterific</a>
-    
-            
-            <!-- log in btn -->
             <a href="signup.html" class="btn">Sign Up</a>
         </div>
     </header>
@@ -25,33 +19,14 @@
             <h2>Login To Continue</h2>
             <p>Log in with your data that you entered <br> during your registration</p>
 
-            <form action="loginform">
-                <span>Enter your email address </span>
-                <input type="text" name="" id="username" placeholder="Username" required>
-                <sapn>Enter your password</sapn>
-                <input type="password" name="" id="userpassword" placeholder="Password" required>
-                <a href="#" class="btn" id="loginButton">Login</a>
-                <a href="#" >Forget Password</a>
+            <form id="loginForm">
+                <span>Enter your email address</span>
+                <input type="text" id="username" placeholder="Username" required>
+                <span>Enter your password</span>
+                <input type="password" id="userpassword" placeholder="Password" required>
+                <button type="submit" class="btn">Login</button>
+                <a href="#">Forget Password</a>
             </form>
-            <script>
-                document.getElementById("loginButton").addEventListener("click", function(event) {
-                    // Prevent the default behavior of the link
-                    event.preventDefault();
-                
-                    // Get the username and password input fields
-                    var username = document.getElementById("username").value;
-                    var password = document.getElementById("userpassword").value;
-                
-                    // Check if username and password are not empty
-                    if (username.trim() !== "" && password.trim() !== "") {
-                        // If both fields are filled, redirect to rent.html
-                        // window.location.href = "rent.html";
-                    } else {
-                        // If either field is empty, display an alert
-                        alert("Please enter both username and password.");
-                    }
-                });
-                </script>
             
             <a href="signup.html" class="btn">Sign up now</a>
         </div>
@@ -60,82 +35,71 @@
         </div>
     </div>
 
-<!-- footer -->
-<section class="footer">
-    <div class="footer-container container">
-        <h2>BVVS</h2>
-        <div class="footer-box">
-            <h3>Web Builders</h3>
-            <a href="#">Kumar</a>
-            <a href="#">Rakshit</a>
-            <a href="#">Hanamant</a>
-            <a href="#">Tanish</a>
+    <!-- footer -->
+    <section class="footer">
+        <div class="footer-container container">
+            <h2>BVVS</h2>
+            <div class="footer-box">
+                <h3>Web Builders</h3>
+                <a href="#">Kumar</a>
+                <a href="#">Rakshit</a>
+                <a href="#">Hanamant</a>
+                <a href="#">Tanish</a>
+            </div>
+            <div class="footer-box">
+                <h3>Locations</h3>
+                <a href="#">Badami</a>
+                <a href="#">Lokapur</a>
+                <a href="#">Badami</a>
+                <a href="#">Bagalkot</a>
+            </div>
+            <div class="footer-box">
+                <h3>Contact</h3>
+                <a href="#">9591781460</a>
+                <a href="#">9110220347</a>
+                <a href="#">7411122068</a>
+                <a href="#">81236 65517</a>
+            </div>
         </div>
-        <div class="footer-box">
-            <h3>Locations</h3>
-            <a href="#">Badami</a>
-            <a href="#">Lokapur</a>
-            <a href="#">Badami</a>
-            <a href="#">Bagalkot</a>
-        </div>
-        <div class="footer-box">
-            <h3>Contact</h3>
-            <a href="#">9591781460</a>
-            <a href="#">9110220347</a>
-            <a href="#">7411122068</a>
-            <a href="#">81236 65517</a>
-        </div>
-        
+    </section>
+    <div class="copyright">
+        <p>&#169; CarpoolVenom All Rights Reserved</p>
     </div>
-</section>
-<div class="copyright">
-    <p>&#169; CarpoolVenom All Rights Reserved</p>
-</div>
-</body>
-<script>
-    document.getElementById("loginButton").addEventListener("click", function(event) {
-        // Prevent the default behavior of the link
-        event.preventDefault();
-    
-        // Get the username and password input fields
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("userpassword").value;
-    
-        // Make AJAX request to login endpoint
-        fetch('http://localhost:9000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                // If response is successful, redirect to rent page
-                window.location.href = "rent.html";
-            } else {
-                // If response is not successful, handle the error
-                return response.json();
-            }
-        })
-        .then(data => {
-            // Display error message if any
-            if (data && data.message) {
-                alert(data.message);
-            } else {
-                // If no specific error message, show a generic error
-                alert("An error occurred. Please try again later.");
-            }
-        })
-        .catch(error => {
-            // Display error message for any network errors
-            console.error('Error:', error);
-            alert("An error occurred. Please check your internet connection and try again.");
-        });
-    });
-</script>
 
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("userpassword").value;
+
+            if (username.trim() !== "" && password.trim() !== "") {
+                // If both fields are filled, make AJAX request to login
+                fetch('http://localhost:9000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Show response message
+                    if (data.message === "Login successful") {
+                        // Redirect to rent page after successful login
+                        window.location.href = "rent.html";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert("Please enter both username and password.");
+            }
+        });
+    </script>
+</body>
 </html>
