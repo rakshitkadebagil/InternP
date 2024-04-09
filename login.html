@@ -45,7 +45,7 @@
                     // Check if username and password are not empty
                     if (username.trim() !== "" && password.trim() !== "") {
                         // If both fields are filled, redirect to rent.html
-                        window.location.href = "rent.html";
+                        // window.location.href = "rent.html";
                     } else {
                         // If either field is empty, display an alert
                         alert("Please enter both username and password.");
@@ -93,12 +93,13 @@
 </div>
 </body>
 <script>
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
+    document.getElementById("loginButton").addEventListener("click", function(event) {
+        // Prevent the default behavior of the link
         event.preventDefault();
     
-        // Get form inputs
-        var username = document.getElementById("loginUsername").value;
-        var password = document.getElementById("loginPassword").value;
+        // Get the username and password input fields
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("userpassword").value;
     
         // Make AJAX request to login endpoint
         fetch('http://localhost:9000/login', {
@@ -111,17 +112,30 @@
                 password: password
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message); // Show response message
-            if (data.message === "Login successful") {
-                // Redirect to rent page after successful login
+        .then(response => {
+            if (response.ok) {
+                // If response is successful, redirect to rent page
                 window.location.href = "rent.html";
+            } else {
+                // If response is not successful, handle the error
+                return response.json();
+            }
+        })
+        .then(data => {
+            // Display error message if any
+            if (data && data.message) {
+                alert(data.message);
+            } else {
+                // If no specific error message, show a generic error
+                alert("An error occurred. Please try again later.");
             }
         })
         .catch(error => {
+            // Display error message for any network errors
             console.error('Error:', error);
+            alert("An error occurred. Please check your internet connection and try again.");
         });
     });
-    </script>
+</script>
+
 </html>
